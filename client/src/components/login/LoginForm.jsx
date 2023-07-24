@@ -5,7 +5,9 @@ import "../signup/signupform.css";
 import { AuthContext } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import SvgComponent from "../SvgComponent";
-import SendVerifyCode from "../remote/Api";
+import SendVerifyCodeRemote from "../remote/Api";
+import MobileLoginRemote from "../remote/Api";
+
 const DEFAULT_SECOND = 120;
 
 const SignupForm = () => {
@@ -23,18 +25,12 @@ const SignupForm = () => {
     e.preventDefault();
 
     try {
-      // let userCredential = await signInWithEmailAndPassword(
-      //   auth,
-      //   loginEmail,
-      //   loginPassword
-      // );
-      const user = {
-        'email':'wuzeyi1101@gmail.com', 
-        'displayName':'子瑜', 
-        'uid':'12322233232',
-        'token':'ABDFA32DE343BBC09B'
-      };
-      dispatch({ type: "LOGIN", payload: user });
+      let userCredential = await MobileLoginRemote(
+        mobile,
+        code
+        );
+
+      dispatch({ type: "LOGIN", payload: userCredential });
       // once user is signed in navigate them to the home page
       navigate("/");
     } catch (error) {
@@ -46,7 +42,7 @@ const SignupForm = () => {
   };
 
   function sendSmSCode(){
-    SendVerifyCode(mobile);
+    SendVerifyCodeRemote(mobile);
     setSeconds(DEFAULT_SECOND);
 
     return;
@@ -74,7 +70,7 @@ const SignupForm = () => {
     // navigate("/");
     // return
 
-    // todo: fix me
+    // // todo: fix me
     // try {
     //   let userCredential = await signInWithPopup(auth, goggleAuthProvider);
     //   const user = userCredential.user;

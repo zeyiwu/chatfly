@@ -5,7 +5,7 @@ import "./signupform.css";
 import { AuthContext } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import SvgComponent from "../SvgComponent";
-import SendVerifyCode from "../remote/Api";
+import SendVerifyCodeRemote from "../remote/Api";
 // import { addDoc, collection } from "firebase/firestore";
 
 const DEFAULT_SECOND = 120;
@@ -54,7 +54,7 @@ const SignupForm = () => {
 
   function sendSmSCode(e){
     e.preventDefault();
-    SendVerifyCode(mobile);
+    SendVerifyCodeRemote(mobile, 0);
     setSeconds(DEFAULT_SECOND);
   };
 
