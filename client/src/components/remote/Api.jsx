@@ -1,13 +1,11 @@
 
-const SendVerifyCodeRemote = ([mobile]) =>{
-    return;
-}
+export const SendVerifyCodeRemote = ([mobile]) =>{return;}
 
-const VerifyCode = ([code, token]) =>{
+export const VerifyCode = ([code, token]) =>{
     return false;
 }
 
-const MobileLoginRemote = ([mobile,code])=>{
+export const MobileLoginRemote = ([mobile,code])=>{
     const user = {
         'email':'wuzeyi1101@gmail.com', 
         'displayName':'子瑜', 
@@ -17,4 +15,9 @@ const MobileLoginRemote = ([mobile,code])=>{
     return user;
 }
 
-export default SendVerifyCodeRemote;
+// export default {SendVerifyCodeRemote,MobileLoginRemote};
+// export {
+//     SendVerifyCodeRemote,
+//     VerifyCode,
+//     MobileLoginRemote
+// }

@@ -5,7 +5,7 @@ import "./signupform.css";
 import { AuthContext } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import SvgComponent from "../SvgComponent";
-import SendVerifyCodeRemote from "../remote/Api";
+import {SendVerifyCodeRemote} from "../remote/Api";
 // import { addDoc, collection } from "firebase/firestore";
 
 const DEFAULT_SECOND = 120;
