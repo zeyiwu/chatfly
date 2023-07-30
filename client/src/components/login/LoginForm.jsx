@@ -22,11 +22,10 @@ const SignupForm = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
+    console.log("params: " +mobile + ", "+ code);
     try {
       let userCredential = await MobileLoginRemote(
-        mobile,
-        code
+        {mobile,code}
         );
 
       dispatch({ type: "LOGIN", payload: userCredential });
