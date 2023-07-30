@@ -24,8 +24,7 @@ const SignupForm = () => {
     e.preventDefault();
     try {
       const userCredential = await MobileLoginRemote({mobile,code});
-      console.log('userCredential '+ userCredential);
-      dispatch({ type: "LOGIN", payload: userCredential });
+      dispatch({ type: "LOGIN", payload: userCredential});
       // once user is signed in navigate them to the home page
       navigate("/");
     } catch (error) {
@@ -48,8 +47,6 @@ const SignupForm = () => {
     }, 1000);
     return ()=> clearInterval(interval);
   });
-
-
   
   const handleRegisterWithEmail = async () => {
     navigate("/register");

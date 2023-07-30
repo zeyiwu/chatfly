@@ -5,10 +5,10 @@ import "./signupform.css";
 import { AuthContext } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import SvgComponent from "../SvgComponent";
-import {SendVerifyCodeRemote} from "../remote/Api";
+import {SendVerifyCodeRemote, CreateUserWithMobileAndPassword} from "../remote/Api";
 // import { addDoc, collection } from "firebase/firestore";
 
-const DEFAULT_SECOND = 120;
+const DEFAULT_SECOND = 5;
 
 const SignupForm = () => {
   const [email, setEmail] = useState("");
@@ -28,19 +28,11 @@ const SignupForm = () => {
     e.preventDefault();
 
     try {
-      // let userCredential = await createUserWithEmailAndPassword(
-      //   auth,
-      //   email,
-      //   password
-      // );
-      const user = {
-        'email':'wuzeyi1101@gmail.com', 
-        'displayName':'子瑜', 
-        'uid':'12322233232',
-        'token':'ABDFA32DE343BBC09B',
-      };
+      let userCredential = await CreateUserWithMobileAndPassword({email,mobile, code, password});
+      console.log("register:"+JSON.stringify(userCredential));
+      navigate("/register/");
 
-      dispatch({ type: "SIGNUP", payload: user });
+      dispatch({ type: "SIGNUP", payload: userCredential});
 
       // once user is signed in navigate them to the home page
       navigate("/");
@@ -52,9 +44,8 @@ const SignupForm = () => {
     }
   };
 
-  function sendSmSCode(e){
-    e.preventDefault();
-    SendVerifyCodeRemote(mobile, 0);
+  const sendSmSCode = async (e)=>{
+    SendVerifyCodeRemote({mobile});
     setSeconds(DEFAULT_SECOND);
   };
 

@@ -6,6 +6,7 @@ import IntroSection from "../components/IntroSection";
 import Loading from "../components/Loading";
 import NavContent from "../components/NavContent";
 import SvgComponent from "../components/SvgComponent";
+import axios from "axios";
 
 const Home = () => {
   const [showMenu, setShowMenu] = useState(false);
@@ -33,12 +34,14 @@ const Home = () => {
       async function callAPI() {
         try {
           const prompt = inputPrompt;
-          const response = await fetch("http://localhost:5000/chat/", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ message: inputPrompt }),
+          const data = await axios.post("http://localhost:5000/chat/",{message: inputPrompt})
+          .then((response) => {
+            return response.data;
+          }).catch((err)=>{
+            console.log("err.response="+JSON.stringify(err.response));
+            console.log(err);
+            return null;
           });
-          const data = await response.json();
           setChatLog([
             ...chatLog,
             {
