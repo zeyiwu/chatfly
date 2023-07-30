@@ -22,12 +22,9 @@ const SignupForm = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    console.log("params: " +mobile + ", "+ code);
     try {
-      let userCredential = await MobileLoginRemote(
-        {mobile,code}
-        );
-
+      const userCredential = await MobileLoginRemote({mobile,code});
+      console.log('userCredential '+ userCredential);
       dispatch({ type: "LOGIN", payload: userCredential });
       // once user is signed in navigate them to the home page
       navigate("/");

@@ -1,4 +1,4 @@
-
+import axios from 'axios'
 export const SendVerifyCodeRemote = ([mobile]) =>{return;}
 export const BackendBaseURL = "http://localhost:5000/";
 
@@ -8,22 +8,17 @@ export const VerifyCode = ([code, token]) =>{
 
 
 export const MobileLoginRemote=({mobile,code})=>{
-        fetch(BackendBaseURL+"sign/", {
-            method:"POST",
-            headers:{"Content-Type":"application/json"},
-            body:JSON.stringify({'mobile':mobile, 'code':String(code)}),
-        })
+    return axios.post(BackendBaseURL+"sign/", {'mobile':mobile, 'code':code})
         .then((response) => {
-            const data =  response.json();
-            if (response.status === 200){
-                return data.user;
+            if (response.status === 200 || response.status ===201){
+                return response.data.user;
             }
+            return null;
         }).catch((err)=>{
             console.log(err);
+            console.log("err message ="+err.message);
+            return null;
         });
- 
-        return null;
-    
     // const user = {
     //     'email':'wuzeyi1101@gmail.com', 
     //     'displayName':'子瑜', 
