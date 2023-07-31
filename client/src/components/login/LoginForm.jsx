@@ -5,15 +5,19 @@ import "../signup/signupform.css";
 import { AuthContext } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import SvgComponent from "../SvgComponent";
-import {SendVerifyCodeRemote, MobileLoginRemote} from "../remote/Api";
+import {SendVerifyCodeRemote, LoginRemote} from "../remote/Api";
 
 const DEFAULT_SECOND = 120;
 
-const SignupForm = () => {
+const SignForm = () => {
   const [mobile, setMobile] = useState("");
   const [code, setCode] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [showSendCode, setShowSendCode] = useState(true);
+  const [useAccountPassword, setUseAccountPassword] = useState(true);
+  const [account, setAccount] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(true);
   let [seconds, setSeconds] =useState(DEFAULT_SECOND)
 
   const { dispatch } = useContext(AuthContext);
@@ -23,8 +27,13 @@ const SignupForm = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const userCredential = await MobileLoginRemote({mobile,code});
-      dispatch({ type: "LOGIN", payload: userCredential});
+      let userCredential = await LoginRemote(
+        useAccountPassword ? account : mobile,
+        code,
+        password
+        );
+
+      dispatch({ type: "LOGIN", payload: userCredential });
       // once user is signed in navigate them to the home page
       navigate("/");
     } catch (error) {
@@ -37,7 +46,6 @@ const SignupForm = () => {
   function sendSmSCode(){
     SendVerifyCodeRemote(mobile);
     setSeconds(DEFAULT_SECOND);
-
     return;
   }
 
@@ -47,6 +55,12 @@ const SignupForm = () => {
     }, 1000);
     return ()=> clearInterval(interval);
   });
+
+
+  const handleLoginWithPassword = async () =>{
+    navigate("/loginWithPassword");
+  }
+
   
   const handleRegisterWithEmail = async () => {
     navigate("/register");
@@ -82,15 +96,80 @@ const SignupForm = () => {
       <SvgComponent w={50} h={50} stroke="#202123" />
       <h1>Welcome Back</h1>
       <form onSubmit={handleLogin}>
-      <input
+      
+      useAccountPassword ?         
+      (
+        <input
+          type="account"
+          name="account"
+          id="account"
+          placeholder="mobile or email"
+          value={account}
+          onChange={(e) => setAccount(e.target.value)}
+          required
+        />
+        <div id="signupPassword">
+          <input
+            type={showPassword ? "text" : "password"}
+            name="password"
+            id="password"
+            placeholder="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            autoComplete="password"
+          />
+          {/* eye icon */}
+          <i onClick={() => setShowPassword(!showPassword)}>
+            {!showPassword ? (
+              <svg
+                width={26}
+                height={26}
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g
+                  stroke="#202123"
+                  strokeWidth={0.792}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M12 5C5.636 5 2 12 2 12s3.636 7 10 7 10-7 10-7-3.636-7-10-7Z" />
+                  <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
+                </g>
+                <title>显示密码</title>
+              </svg>
+            ) : (
+              <svg
+                width={26}
+                height={26}
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                stroke="#000"
+              >
+                <path
+                  d="M20 14.834C21.308 13.332 22 12 22 12s-3.636-7-10-7a8.595 8.595 0 0 0-2 .236M12 9a2.995 2.995 0 0 1 3 3M3 3l18 18m-9-6a2.997 2.997 0 0 1-2.959-2.5M4.147 9c-.308.345-.585.682-.828 1C2.453 11.128 2 12 2 12s3.636 7 10 7c.341 0 .675-.02 1-.058"
+                  stroke="#202123"
+                  strokeWidth={0.768}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                <title>隐藏密码</title>
+              </svg>
+            )}
+          </i>
+        </div>
+      ) :
+        (<input
           type="mobile"
           name="mobile"
           id="mobile"
           placeholder="mobile"
           value={mobile}
           onChange={(e) => setMobile(e.target.value)}
-          required
-        />
+          required/>
         <input
           type="code"
           name = "code"
@@ -100,12 +179,12 @@ const SignupForm = () => {
           onChange={(e)=> setCode(e.target.value)}
           required
         />
-        
           {
           showSendCode ? (<button type="text" onClick={()=>{setShowSendCode(false);sendSmSCode();}}>发送验证码</button>)
                             : (seconds > 0 ? (<button type="text" onClick={()=>{}} >{seconds}s后重发</button >) : 
                             <button type="text" onClick={()=>{setShowSendCode(false);sendSmSCode();}}>发送验证码</button>)
           }
+        )
 
         <button type="submit">登录</button>
         {errorMessage.trim() !== " " && <span>{errorMessage}</span>}
@@ -175,6 +254,11 @@ const SignupForm = () => {
         </div> */}
 
       <div className="signupSeparator">   </div>
+      <button id="signupWithEmail" onClick={()=>{setUseAccountPassword(true);}}>
+        账号密码登录 
+      </button>
+      <div className="signupSeparator">   </div>
+
       <button id="signupWithEmail" onClick={handleRegisterWithEmail}>
         邮箱注册
       </button>
@@ -182,4 +266,4 @@ const SignupForm = () => {
   );
 };
 
-export default SignupForm;
+export default SignForm;
