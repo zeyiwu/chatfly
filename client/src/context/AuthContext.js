@@ -15,7 +15,10 @@ export const AuthContextProvider = ({ children }) => {
   useEffect(() => {
     // need to convert JS object to string to store in localStorage
     localStorage.setItem("user", JSON.stringify(state.currentUser));
-    let token = state.currentUser.token;
+    let token = null;
+    if (state.currentUser !== null){
+      token = state.currentUser.token;
+    }
     if (token) {
       console.log("update token = " + token);
       axios.defaults.headers.common["Authorization"] = "Bearer " + token;

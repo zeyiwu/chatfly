@@ -27,11 +27,14 @@ const SignForm = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      let val =  useAccountPassword ? account : mobile
+      setAccount(useAccountPassword ? account: mobile);
+      console.log("to loginRemote:"+  "account=" + account + ", mobile="+mobile)
       let userCredential = await LoginRemote(
-        {val,
+        {
+          account,
         code,
-        password}
+        password
+      }
         );
 
       dispatch({ type: "LOGIN", payload: userCredential });
