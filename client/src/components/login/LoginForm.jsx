@@ -14,7 +14,7 @@ const SignForm = () => {
   const [code, setCode] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [showSendCode, setShowSendCode] = useState(true);
-  const [useAccountPassword, setUseAccountPassword] = useState(true);
+  const [useAccountPassword, setUseAccountPassword] = useState(false);
   const [account, setAccount] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(true);
@@ -27,10 +27,11 @@ const SignForm = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
+      let val =  useAccountPassword ? account : mobile
       let userCredential = await LoginRemote(
-        useAccountPassword ? account : mobile,
+        {val,
         code,
-        password
+        password}
         );
 
       dispatch({ type: "LOGIN", payload: userCredential });
@@ -96,9 +97,10 @@ const SignForm = () => {
       <SvgComponent w={50} h={50} stroke="#202123" />
       <h1>Welcome Back</h1>
       <form onSubmit={handleLogin}>
-      
-      useAccountPassword ?         
+      {
+       useAccountPassword ?         
       (
+        <>
         <input
           type="account"
           name="account"
@@ -161,8 +163,11 @@ const SignForm = () => {
             )}
           </i>
         </div>
+        </>
       ) :
-        (<input
+        (
+        <>
+          <input
           type="mobile"
           name="mobile"
           id="mobile"
@@ -179,13 +184,16 @@ const SignForm = () => {
           onChange={(e)=> setCode(e.target.value)}
           required
         />
+        <>
           {
           showSendCode ? (<button type="text" onClick={()=>{setShowSendCode(false);sendSmSCode();}}>发送验证码</button>)
                             : (seconds > 0 ? (<button type="text" onClick={()=>{}} >{seconds}s后重发</button >) : 
                             <button type="text" onClick={()=>{setShowSendCode(false);sendSmSCode();}}>发送验证码</button>)
           }
+          </>
+        </>
         )
-
+      }
         <button type="submit">登录</button>
         {errorMessage.trim() !== " " && <span>{errorMessage}</span>}
       </form>
@@ -257,8 +265,6 @@ const SignForm = () => {
       <button id="signupWithEmail" onClick={()=>{setUseAccountPassword(true);}}>
         账号密码登录 
       </button>
-      <div className="signupSeparator">   </div>
-
       <button id="signupWithEmail" onClick={handleRegisterWithEmail}>
         邮箱注册
       </button>

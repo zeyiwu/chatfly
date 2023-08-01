@@ -29,6 +29,7 @@ function App() {
         />
         <Route exact path="register" element={<Login />} />
         <Route exact path="login" element={<LoginForm />} />
+        
       </Routes>
     </div>
   );
