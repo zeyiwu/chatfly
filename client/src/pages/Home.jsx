@@ -34,7 +34,7 @@ const Home = () => {
       async function callAPI() {
         try {
           const prompt = inputPrompt;
-          const data = await axios.post("http://localhost:5000/chat/",{message: inputPrompt})
+          const data = await axios.post("http://localhost:8079/chat/",{message: inputPrompt})
           .then((response) => {
             return response.data;
           }).catch((err)=>{
