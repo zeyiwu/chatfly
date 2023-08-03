@@ -23,8 +23,9 @@ export const CreateUserWithMobileAndPassword=({email, mobile, code, password})=>
          });
     }
 
-export const LoginRemote=({account, code, password})=>{
-        return axios.post(BackendBaseURL+"sign/", {'account':account, 'code':code, 'password':password})
+export const LoginRemote=({accountId, code, password})=>{
+        console.log("loginremote: account:" + accountId + " code:" + code + "  password:" + password)
+        return axios.post(BackendBaseURL+"sign/", {'account': accountId, 'code':code, 'password':password})
             .then((response) => {
                 if (response.status === 200 || response.status ===201){
                     return response.data.user;

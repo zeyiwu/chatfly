@@ -27,11 +27,14 @@ const SignForm = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      setAccount(useAccountPassword ? account: mobile);
-      console.log("to loginRemote:"+  "account=" + account + ", mobile="+mobile)
+      
+      let accountId = account;
+      if (!useAccountPassword){
+        accountId = mobile;
+      }
       let userCredential = await LoginRemote(
         {
-          account,
+        accountId,
         code,
         password
       }
