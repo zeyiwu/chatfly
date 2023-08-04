@@ -138,17 +138,17 @@ nav svg {
 }
 .chatBox {
   flex: 1;
-  background-color: #353540;
+  background-color: #cecedd;
   position: relative;
   line-height: 24px;
-  color: #d1d5db;
+  color: #1866dc;
   font-size: 16px;
 }
 #introsection::before,
 #introsection::after {
   content: "<HomePage/>";
   float: left;
-  color: rgb(0, 134, 244);
+  color: rgb(195, 195, 208);
 }
 #introsection {
   text-align: left;
