@@ -50,9 +50,16 @@ const SignForm = () => {
     }
   };
 
-  function sendSmSCode(){
-    SendVerifyCodeRemote(mobile);
-    setSeconds(DEFAULT_SECOND);
+  const handleSendVerifyCode = async (e) => {
+    e.preventDefault();
+    setShowSendCode(false);
+    try{
+      let result = await SendVerifyCodeRemote({account,mobile});
+    console.log("send verify code: " + result);
+    }catch(error){
+      console.log(error);
+      setErrorMessage(error.message);
+    }
     return;
   }
 
@@ -192,9 +199,9 @@ const SignForm = () => {
         />
         <>
           {
-          showSendCode ? (<button type="text" onClick={()=>{setShowSendCode(false);sendSmSCode();}}>发送验证码</button>)
+          showSendCode ? (<button type="text" onClick={handleSendVerifyCode}>发送验证码</button>)
                             : (seconds > 0 ? (<button type="text" onClick={()=>{}} >{seconds}s后重发</button >) : 
-                            <button type="text" onClick={()=>{setShowSendCode(false);sendSmSCode();}}>发送验证码</button>)
+                            <button type="text" onClick={handleSendVerifyCode}>发送验证码</button>)
           }
           </>
         </>

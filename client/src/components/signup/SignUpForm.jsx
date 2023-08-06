@@ -44,10 +44,19 @@ const SignupForm = () => {
     }
   };
 
-  const sendSmSCode = async (e)=>{
-    SendVerifyCodeRemote({mobile});
-    setSeconds(DEFAULT_SECOND);
-  };
+  const handleSendVerifyCode = async (e) => {
+    e.preventDefault();
+    setShowSendCode(false);
+    console.log("email = "+ email + ", mobile = "+mobile);
+    try{
+      let result = await SendVerifyCodeRemote({email, mobile});
+    console.log("send verify code: " + result);
+    }catch(error){
+      console.log(error);
+      setErrorMessage(error.message);
+    }
+    return;
+  }
 
   useEffect(()=>{
     const interval = setInterval(()=>{
@@ -146,19 +155,11 @@ const SignupForm = () => {
         />
         <div>
           {
-          showSendCode ? (<button type="text" onClick={(e)=>{
-            e.preventDefault();
-            setShowSendCode(false);
-            sendSmSCode();
-          }}>发送验证码</button>) : 
+          showSendCode ? (<button type="text" onClick={handleSendVerifyCode}>发送验证码</button>) : 
           (seconds > 0 ? (<button type="text" onClick={(e)=>{
             e.preventDefault();
           }} >{seconds}s后重发</button >) : 
-                            <button type="text" onClick={(e)=>{
-                              e.preventDefault();
-                              setShowSendCode(false);
-                              sendSmSCode();
-                            }}>发送验证码</button>)
+                            <button type="text" onClick={handleSendVerifyCode}>发送验证码</button>)
           }
         </div>
         <button type="submit">注册账号</button>

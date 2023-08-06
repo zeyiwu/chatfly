@@ -1,7 +1,22 @@
 
 import axios from "axios";
-export const SendVerifyCodeRemote = ([mobile]) =>{return;}
 export const BackendBaseURL = "http://localhost:8079/";
+
+export const SendVerifyCodeRemote = ({email, mobile}) =>{
+    console.log("sendVerifyCode " + "email = "+email + ", mobile = "+mobile);
+    return axios.post(BackendBaseURL+"sendVerifyCode/", {'mobile':mobile, 'email':email})
+    .then((response) => {
+        if(response.status ===200 || response.status===201){
+            return "ok";
+        }
+        console.log("response="+JSON.stringify(response));
+        return response.data;
+    }).catch((err)=>{
+        console.log("err.response="+JSON.stringify(err.response));
+        console.log(err);
+        return err;
+    });
+}
 
 export const VerifyCode = ([code, token]) =>{
     return false;
