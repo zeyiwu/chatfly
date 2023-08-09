@@ -33,7 +33,7 @@ header h1 {
 }
 nav {
   display: none;
-  background-color: #4c4f5f;
+  background-color: #373b52;
   position: fixed;
   top: 0;
   right: 0;
@@ -112,7 +112,7 @@ nav svg {
 .sideMenu {
   width: 244px;
   padding: 8px;
-  background-color: #202022;
+  background-color: #fff;
 }
 .sideMenuButton {
   border: 1px solid hsl(0deg 0% 100% / 20%);
@@ -124,6 +124,8 @@ nav svg {
   -webkit-transition: all 0.25s ease;
   -moz-transition: all 0.25s ease;
   -o-transition: all 0.25s ease;
+  color: #000;
+  background-color: #d0d0d0;
 }
 .navPrompt:hover,
 .sideMenuButton:hover {
@@ -138,10 +140,10 @@ nav svg {
 }
 .chatBox {
   flex: 1;
-  background-color: #cecedd;
+  background-color: #f1f1f6;
   position: relative;
   line-height: 24px;
-  color: #1866dc;
+  color: #030d1d;
   font-size: 16px;
 }
 #introsection::before,
@@ -215,7 +217,7 @@ nav svg {
 }
 .botMessageMainContainer {
   width: 100%;
-  background-color: #444654;
+  background-color: #e3e5f1;
   position: relative;
 }
 .botMessageWrapper {
@@ -283,7 +285,7 @@ nav svg {
   padding: 10px;
   flex: 1;
   resize: none;
-  background-color: #41414e;
+  background-color: #ffffff;
   color: #fff;
   font-size: 16px;
   outline: none;
@@ -291,7 +293,7 @@ nav svg {
   overflow-y: hidden;
 }
 form button {
-  background: rgb(65, 65, 78);
+  background: rgb(211 211 223);
   border: none;
   position: absolute;
   top: 20%;
