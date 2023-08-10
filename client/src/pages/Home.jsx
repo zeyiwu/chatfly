@@ -7,6 +7,7 @@ import Loading from "../components/Loading";
 import NavContent from "../components/NavContent";
 import SvgComponent from "../components/SvgComponent";
 import axios from "axios";
+import {Base64} from "js-base64";
 
 const Home = () => {
   const [showMenu, setShowMenu] = useState(false);
@@ -34,7 +35,7 @@ const Home = () => {
       async function callAPI() {
         try {
           const prompt = inputPrompt;
-          const data = await axios.post("http://localhost:8079/chat/",{message: inputPrompt})
+          const data = await axios.post("http://localhost:8079/chat/",{message: Base64.encode(inputPrompt)}) // base64 encode
           .then((response) => {
             return response.data;
           }).catch((err)=>{
@@ -46,7 +47,7 @@ const Home = () => {
             ...chatLog,
             {
               chatPrompt: inputPrompt,
-              botMessage: data.botResponse,
+              botMessage: Base64.decode(data.botResponse),  // base64 decode
             },
           ]);
           setErr(false);
