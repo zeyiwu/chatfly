@@ -6,7 +6,7 @@ import { AuthContext } from "../context/AuthContext";
 const NavLinksContainer = ({ chatLog, setChatLog }) => {
   const { currentUser } = useContext(AuthContext);
   return (
-    <div className="navLinks" style={{ position: "absolute", bottom: "10px" }}>
+    <div className="navLinks">
       <h5>{currentUser.email}</h5>
       {chatLog.length > 0 && (
         <NavLinks
