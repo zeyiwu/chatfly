@@ -132,7 +132,8 @@ const SignupForm = () => {
             )}
           </i>
         </div>
-        <div>
+        
+        {/* <div>
         <input
           type="mobile"
           name = "mobile"
@@ -142,8 +143,8 @@ const SignupForm = () => {
           onChange={(e)=> setMobile(e.target.value)}
           required
         />
+        </div> */}
 
-        </div>
         <input
           type="code"
           name = "code"

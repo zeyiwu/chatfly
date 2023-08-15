@@ -14,7 +14,7 @@ const SignForm = () => {
   const [code, setCode] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [showSendCode, setShowSendCode] = useState(true);
-  const [useAccountPassword, setUseAccountPassword] = useState(false);
+  const [useAccountPassword, setUseAccountPassword] = useState(true);
   const [account, setAccount] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(true);
