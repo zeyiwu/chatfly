@@ -63,7 +63,7 @@ nav {
   margin: 5px 0;
   text-align: left;
   color:#000;
-  background-color: #f0eaea;
+  background-color: #eaecf052;
 }
 .navPrompt a {
   display: flex;
@@ -74,7 +74,7 @@ nav {
 .navPrompt p {
   font-size: 14px;
   line-height: 20px;
-  color: #ececf1;
+  color: #080808;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -295,7 +295,7 @@ nav svg {
   flex: 1;
   resize: none;
   background-color: #ffffff;
-  color: #fff;
+  color: #0c0c0c;
   font-size: 16px;
   outline: none;
   border: none;
