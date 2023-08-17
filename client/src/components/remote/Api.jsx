@@ -1,6 +1,6 @@
 
 import axios from "axios";
-export const BackendBaseURL = "http://localhost:8079/";
+export const BackendBaseURL = "http://43.135.135.236:8079/";
 
 export const SendVerifyCodeRemote = ({email, mobile}) =>{
     console.log("sendVerifyCode " + "email = "+email + ", mobile = "+mobile);
