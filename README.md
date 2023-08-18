@@ -1,90 +1,70 @@
-# Talkbot App
+# Getting Started with Create React App
 
-A conversational AI app inspired by OpenAI's GPT-3 language model, built with Create React App.
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Features
+## Available Scripts
 
-- Natural language processing and understanding
-- Context-aware responses
-- Ability to converse on a variety of topics
-- React-based front-end for easy user interaction
-- Node.js back-end for communication with the OpenAI API
+In the project directory, you can run:
 
-## Requirements
+### `npm start`
 
-- Node JS
-- npm
-- [Create Open AI account](https://beta.openai.com/signup/)
+Runs the app in the development mode.\
+Open [http://localhost:7079](http://localhost:7079) to view it in your browser.
 
-## Setup
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
 
-1. Clone the repository
+### `npm test`
 
-```
-git clone https://github.com/zeyiwu/chatfly.git
-```
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-2. Install client dependencies
+### `npm run build`
 
-```
-cd client
-npm install
-```
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-3. Install server dependencies
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-```
-cd server
-npm install
-```
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-4. Get your Open AI API key from [Open AI API Key](https://platform.openai.com/account/api-keys)
+### `npm run eject`
 
-5. Environment Variable Setup
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-- Go to server folder and create .env file in root of server folder and create a variable REACT_APP_OPENAI_API_KEY = [ Your Open AI key here ] insise .env file as
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-```
-REACT_APP_OPENAI_API_KEY = [Your Open AI key here]
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-```
-6. Configure Firebase 
-- Go to [firbase console](https://console.firebase.google.com/) & click on add project, follow the guidelines to create new firebase project
-- Once project is created you'll see the config file generated for you. If you do not find the config file, see the Project Overview section on the left panel. Just click the gear icon     which is at the right of Project Overview, there you'll see the Project Setting. 
-- Click on the Project Setting, scroll to the bottom there you'll see "Your apps" section. You need to select web with <mark> </> </mark> symbols. Click on the icon and follow along to add firebase to your web app. Once you'll have your config file update your firebase.config file in the client/src folder. 
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Usage
+## Learn More
 
-1. Start the client
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-```
-cd client
-npm start
-```
+To learn React, check out the [React documentation](https://reactjs.org/).
 
-2. Start the server
+### Code Splitting
 
-```
-cd server
-node index.js
-```
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-- Check if your client application run on port 7079 with the development environment configuration, so in your browser just go to http://localhost:7079
+### Analyzing the Bundle Size
 
-- Check if your server application run on port 4000
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-## Contribution
+### Making a Progressive Web App
 
-All contributions are welcome. Feel free to open an issue or create a pull request. And I will be more than happy for sponsors.
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-<a href="https://www.buymeacoffee.com/sushantdhimal" target="_blank"><img src="./client/public/buymeacoffee.png" alt="Buy Me A Coffee" style="height: 50px !important;width: 200px !important;" ></a>
+### Advanced Configuration
 
-## Liscence
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-This project is licensed under the Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) license.
+### Deployment
 
-This means that you can use, copy, and modify the code as long as you give credit to the original author (attribution), don't use it for commercial purposes (non-commercial), and distribute any modifications under the same license (share alike).
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
-Please note that this license applies to the code in this repository only, and does not apply to the OpenAI API, which is subject to its own license agreement.
+### `npm run build` fails to minify
 
-[Liscence](LISCENCE)
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
