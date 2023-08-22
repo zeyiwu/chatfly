@@ -1,7 +1,7 @@
 import "./normal.css";
 import "./App.css";
 import Home from "./pages/Home";
-import Login from "./pages/Login";
+import SignupForm from "./components/signup/SignUpForm";
 import LoginForm from "./components/login/LoginForm";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { useContext } from "react";
@@ -27,7 +27,7 @@ function App() {
             </RequireAuth>
           }
         />
-        <Route exact path="register" element={<Login />} />
+        <Route exact path="register" element={<SignupForm />} />
         <Route exact path="login" element={<LoginForm />} />
         
       </Routes>

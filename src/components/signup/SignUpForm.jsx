@@ -163,7 +163,7 @@ const SignupForm = () => {
                             <button type="text" onClick={handleSendVerifyCode}>发送验证码</button>)
           }
         </div>
-        <button type="submit">注册</button>
+        <button type="submit">新用户注册</button>
         {errorMessage.trim() !== " " && <span>{errorMessage}</span>}
       </form>
     </div>

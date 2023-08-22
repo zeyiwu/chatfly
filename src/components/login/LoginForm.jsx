@@ -271,11 +271,11 @@ const SignForm = () => {
         </div> */}
 
       <div className="signupSeparator">   </div>
-      <button id="signupWithEmail" onClick={()=>{setUsePassword(true);}}>
+      {/* <button id="signupWithEmail" onClick={()=>{setUsePassword(true);}}>
         去登录 
-      </button>
+      </button> */}
       <button id="signupWithEmail" onClick={handleRegisterWithEmail}>
-        去注册
+        注册
       </button>
     </div>
   );
