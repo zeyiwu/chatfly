@@ -7,7 +7,7 @@ const NavLinksContainer = ({ chatLog, setChatLog }) => {
   const { currentUser } = useContext(AuthContext);
   return (
     <div className="navLinks">
-      <h5>{currentUser.email}</h5>
+      <h5>{currentUser.name}</h5>
       {chatLog.length > 0 && (
         <NavLinks
           svg={

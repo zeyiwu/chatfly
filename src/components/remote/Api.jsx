@@ -1,5 +1,6 @@
 
 import axios from "axios";
+// export const BackendBaseURL = "http://localhost:8079/";
 export const BackendBaseURL = "http://cdog.xyz:8079/";
 
 export const SendVerifyCodeRemote = ({mobile}) =>{
@@ -38,9 +39,9 @@ export const CreateUserWithMobileAndPassword=({mobile, code, password})=>{
          });
     }
 
-export const LoginRemote=({accountId, code, password})=>{
-        console.log("loginremote: account:" + accountId + " code:" + code + "  password:" + password)
-        return axios.post(BackendBaseURL+"sign/", {'mobile': accountId, 'code':code, 'password':password})
+export const LoginRemote=({mobile, code, password})=>{
+        console.log("loginremote: mobile:" + mobile + " code:" + code + "  password:" + password)
+        return axios.post(BackendBaseURL+"sign/", {'mobile': mobile, 'code':code, 'password':password})
             .then((response) => {
                 if (response.status === 200 || response.status ===201){
                     return response.data.user;

@@ -28,13 +28,9 @@ const SignForm = () => {
     e.preventDefault();
     try {
       
-      let accountId = account;
-      if (!usePassword){
-        accountId = mobile;
-      }
       let userCredential = await LoginRemote(
         {
-        accountId,
+        mobile,
         code,
         password
       }
