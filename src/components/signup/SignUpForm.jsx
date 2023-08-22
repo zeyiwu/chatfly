@@ -28,7 +28,7 @@ const SignupForm = () => {
     e.preventDefault();
 
     try {
-      let userCredential = await CreateUserWithMobileAndPassword({email,mobile, code, password});
+      let userCredential = await CreateUserWithMobileAndPassword({mobile, code, password});
       console.log("register:"+JSON.stringify(userCredential));
       navigate("/register/");
 
@@ -47,9 +47,9 @@ const SignupForm = () => {
   const handleSendVerifyCode = async (e) => {
     e.preventDefault();
     setShowSendCode(false);
-    console.log("email = "+ email + ", mobile = "+mobile);
+    console.log(", mobile = "+mobile);
     try{
-      let result = await SendVerifyCodeRemote({email, mobile});
+      let result = await SendVerifyCodeRemote({mobile});
     console.log("send verify code: " + result);
     }catch(error){
       console.log(error);
@@ -71,12 +71,12 @@ const SignupForm = () => {
       <h1>创建账户</h1>
       <form onSubmit={handleSignup}>
         <input
-          type="email"
-          name="email"
-          id="email"
-          placeholder="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          type="mobile"
+          name="mobile"
+          id="mobile"
+          placeholder="输入手机号"
+          value={mobile}
+          onChange={(e) => setMobile(e.target.value)}
           required
         />
         <div id="signupPassword">
@@ -84,7 +84,7 @@ const SignupForm = () => {
             type={showPassword ? "text" : "password"}
             name="password"
             id="password"
-            placeholder="password"
+            placeholder="输入密码"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
@@ -163,7 +163,7 @@ const SignupForm = () => {
                             <button type="text" onClick={handleSendVerifyCode}>发送验证码</button>)
           }
         </div>
-        <button type="submit">注册账号</button>
+        <button type="submit">注册</button>
         {errorMessage.trim() !== " " && <span>{errorMessage}</span>}
       </form>
     </div>

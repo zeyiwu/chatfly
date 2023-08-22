@@ -14,7 +14,7 @@ const SignForm = () => {
   const [code, setCode] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [showSendCode, setShowSendCode] = useState(true);
-  const [useAccountPassword, setUseAccountPassword] = useState(true);
+  const [usePassword, setUsePassword] = useState(true);
   const [account, setAccount] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(true);
@@ -29,7 +29,7 @@ const SignForm = () => {
     try {
       
       let accountId = account;
-      if (!useAccountPassword){
+      if (!usePassword){
         accountId = mobile;
       }
       let userCredential = await LoginRemote(
@@ -54,7 +54,7 @@ const SignForm = () => {
     e.preventDefault();
     setShowSendCode(false);
     try{
-      let result = await SendVerifyCodeRemote({account,mobile});
+      let result = await SendVerifyCodeRemote({mobile});
     console.log("send verify code: " + result);
     }catch(error){
       console.log(error);
@@ -108,19 +108,19 @@ const SignForm = () => {
   return (
     <div className="signupFormContainer">
       <SvgComponent w={50} h={50} stroke="#202123" />
-      <h1>Welcome Back</h1>
+      <h1>欢迎回来</h1>
       <form onSubmit={handleLogin}>
       {
-       useAccountPassword ?         
+       usePassword ?         
       (
         <>
         <input
-          type="account"
-          name="account"
-          id="account"
-          placeholder="mobile or email"
-          value={account}
-          onChange={(e) => setAccount(e.target.value)}
+          type="mobile"
+          name="mobile"
+          id="mobile"
+          placeholder="输入手机号"
+          value={mobile}
+          onChange={(e) => setMobile(e.target.value)}
           required
         />
         <div id="signupPassword">
@@ -275,11 +275,11 @@ const SignForm = () => {
         </div> */}
 
       <div className="signupSeparator">   </div>
-      <button id="signupWithEmail" onClick={()=>{setUseAccountPassword(true);}}>
-        账号密码登录 
+      <button id="signupWithEmail" onClick={()=>{setUsePassword(true);}}>
+        去登录 
       </button>
       <button id="signupWithEmail" onClick={handleRegisterWithEmail}>
-        邮箱注册
+        去注册
       </button>
     </div>
   );

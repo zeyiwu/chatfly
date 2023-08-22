@@ -2,9 +2,9 @@
 import axios from "axios";
 export const BackendBaseURL = "http://cdog.xyz:8079/";
 
-export const SendVerifyCodeRemote = ({email, mobile}) =>{
-    console.log("sendVerifyCode " + "email = "+email + ", mobile = "+mobile);
-    return axios.post(BackendBaseURL+"sendVerifyCode/", {'mobile':mobile, 'email':email})
+export const SendVerifyCodeRemote = ({mobile}) =>{
+    console.log("sendVerifyCode " + ", mobile = "+mobile);
+    return axios.post(BackendBaseURL+"sendVerifyCode/", {'mobile':mobile})
     .then((response) => {
         if(response.status ===200 || response.status===201){
             return "ok";
@@ -23,8 +23,8 @@ export const VerifyCode = ([code, token]) =>{
 }
 
 
-export const CreateUserWithMobileAndPassword=({email, mobile, code, password})=>{
-         return axios.post(BackendBaseURL+"signup/", {'mobile':mobile, 'code':code, 'email':email, 'password':password})
+export const CreateUserWithMobileAndPassword=({mobile, code, password})=>{
+         return axios.post(BackendBaseURL+"signup/", {'mobile':mobile, 'code':code, 'password':password})
          .then((response) => {
              if(response.status ===200 || response.status===201){
                  return response.data.user;
@@ -40,7 +40,7 @@ export const CreateUserWithMobileAndPassword=({email, mobile, code, password})=>
 
 export const LoginRemote=({accountId, code, password})=>{
         console.log("loginremote: account:" + accountId + " code:" + code + "  password:" + password)
-        return axios.post(BackendBaseURL+"sign/", {'account': accountId, 'code':code, 'password':password})
+        return axios.post(BackendBaseURL+"sign/", {'mobile': accountId, 'code':code, 'password':password})
             .then((response) => {
                 if (response.status === 200 || response.status ===201){
                     return response.data.user;
