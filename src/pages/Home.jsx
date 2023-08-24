@@ -8,16 +8,25 @@ import NavContent from "../components/NavContent";
 import SvgComponent from "../components/SvgComponent";
 import axios from "axios";
 import {Base64} from "js-base64";
-import {BackendBaseURL} from "../components/remote/Api"
 
 const Home = () => {
   const [showMenu, setShowMenu] = useState(false);
   const [inputPrompt, setInputPrompt] = useState("");
   const [chatLog, setChatLog] = useState([]);
+  const [chatId, setChatId] = useState("");
+  const [questions, setQuestions] = useState([]);
   const [err, setErr] = useState(false);
   const [responseFromAPI, setResponseFromAPI] = useState(false);
 
   const chatLogRef = useRef(null);
+
+  useEffect(async ()=>{
+    const result = await axios.post("/api/getQuestion/",{});
+    if (result.data !== null){
+      result.data.questions === null ? setQuestions([]):setQuestions(result.data.questions);
+      console.log("questions: " + questions);
+    }
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -36,7 +45,7 @@ const Home = () => {
       async function callAPI() {
         try {
           const prompt = inputPrompt;
-          const data = await axios.post(BackendBaseURL+"chat/",{message: Base64.encode(inputPrompt)}) // base64 encode
+          const data = await axios.post("/api/chat/",{message: Base64.encode(inputPrompt), chatId:chatId}) // base64 encode
           .then((response) => {
             return response.data;
           }).catch((err)=>{
@@ -49,6 +58,8 @@ const Home = () => {
             {
               chatPrompt: inputPrompt,
               botMessage: Base64.decode(data.botResponse),  // base64 decode
+              chatId:data.chatId ? data.chatId : null,
+              questionId:data.questionId ? data.questionId : null,
             },
           ]);
           setErr(false);

@@ -1,7 +1,7 @@
 import { createContext, useEffect, useReducer, useState } from "react";
 import axios from "axios";
 import reducer from "./AuthReducer";
-export const CommonAxios = axios.create({baseURL:'http://locahost:5000/'});;
+export const CommonAxios = axios.create({baseURL:'http://locahost:8079/'});;
 
 const initialState = {
   // currentUser must be object so JSON string must be parsed into JS object
