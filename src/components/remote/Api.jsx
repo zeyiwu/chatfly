@@ -5,7 +5,7 @@ export const BackendBaseURL = "http://localhost:8079/";
 
 export const SendVerifyCodeRemote = ({mobile}) =>{
     console.log("sendVerifyCode " + ", mobile = "+mobile);
-    return axios.post("/api/sendVerifyCode/", {'mobile':mobile})
+    return axios.post(BackendBaseURL+"sendVerifyCode/", {'mobile':mobile})
     .then((response) => {
         if(response.status ===200 || response.status===201){
             return "ok";
@@ -25,7 +25,7 @@ export const VerifyCode = ([code, token]) =>{
 
 
 export const CreateUserWithMobileAndPassword=({mobile, code, password})=>{
-         return axios.post("/api/signup/", {'mobile':mobile, 'code':code, 'password':password})
+         return axios.post(BackendBaseURL+"signup/", {'mobile':mobile, 'code':code, 'password':password})
          .then((response) => {
              if(response.status ===200 || response.status===201){
                  return response.data.user;
@@ -41,7 +41,7 @@ export const CreateUserWithMobileAndPassword=({mobile, code, password})=>{
 
 export const LoginRemote=({mobile, code, password})=>{
         console.log("loginremote: mobile:" + mobile + " code:" + code + "  password:" + password)
-        return axios.post("/api/sign/", {'mobile': mobile, 'code':code, 'password':password})
+        return axios.post(BackendBaseURL+"sign/", {'mobile': mobile, 'code':code, 'password':password})
             .then((response) => {
                 if (response.status === 200 || response.status ===201){
                     return response.data.user;
