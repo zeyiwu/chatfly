@@ -24,7 +24,7 @@ const Home = () => {
   const makeQuestionCall = async () => {
     try {
       const response =await axios.post(BackendBaseURL+"getQuestion/",{});
-      const data = await response.json();
+      const data = response.data;
       data.questions === null ? setQuestions([]):setQuestions(data.questions);
       console.log({ data })
     }
