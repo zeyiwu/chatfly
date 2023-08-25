@@ -23,6 +23,7 @@ const Home = () => {
 
   const makeQuestionCall = async () => {
     try {
+      await axios.post(BackendBaseURL+"debug/",{});
       const response =await axios.post(BackendBaseURL+"getQuestion/",{});
       const data = response.data;
       data.questions === null ? setQuestions([]):setQuestions(data.questions);
