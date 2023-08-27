@@ -14,29 +14,35 @@ const Home = () => {
   const [showMenu, setShowMenu] = useState(false);
   const [inputPrompt, setInputPrompt] = useState("");
   const [chatLog, setChatLog] = useState([]);
-  const [chatId, setChatId] = useState("");
-  const [questions, setQuestions] = useState([]);
   const [err, setErr] = useState(false);
   const [responseFromAPI, setResponseFromAPI] = useState(false);
 
   const chatLogRef = useRef(null);
 
-  const makeQuestionCall = async () => {
-    try {
-      await axios.post(BackendBaseURL+"debug/",{});
-      const response =await axios.post(BackendBaseURL+"getQuestion/",{});
-      const data = response.data;
-      data.questions === null ? setQuestions([]):setQuestions(data.questions);
-      console.log({ data })
-    }
-    catch (e) {
-      console.log(e)
-    }
-  }
-
-  useEffect(() => {
-    makeQuestionCall();
-  }, [])
+  useEffect(()=>{
+    const makeChatLogCall = async () => {
+      try {
+        await axios.post(BackendBaseURL+"debug/",{});
+        const response =await axios.post(BackendBaseURL+"getChatLogs/",{});
+        console.log(response.data);
+        let tempChatLog = []; 
+        response.data !== null && response.data.chatLogs.forEach(chatLog=>{
+        tempChatLog.push({
+                    chatPrompt: Base64.decode(chatLog.question),
+                    botMessage: Base64.decode(chatLog.answer),  // base64 decode
+                    questionId:chatLog.id,
+                    createTime:chatLog.create_time
+                  });
+         });
+        console.log({tempChatLog});
+        setChatLog(tempChatLog);
+      }catch (e) {
+        console.log(e);
+      }
+    }  
+    makeChatLogCall();
+    console.log({chatLog});
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -55,7 +61,7 @@ const Home = () => {
       async function callAPI() {
         try {
           const prompt = inputPrompt;
-          const data = await axios.post(BackendBaseURL+"chat/",{message: Base64.encode(inputPrompt), chatId:chatId}) // base64 encode
+          const data = await axios.post(BackendBaseURL+"chat/",{message: Base64.encode(inputPrompt)}) // base64 encode
           .then((response) => {
             return response.data;
           }).catch((err)=>{
@@ -68,8 +74,6 @@ const Home = () => {
             {
               chatPrompt: inputPrompt,
               botMessage: Base64.decode(data.botResponse),  // base64 decode
-              chatId:data.chatId ? data.chatId : null,
-              questionId:data.questionId ? data.questionId : null,
             },
           ]);
           setErr(false);

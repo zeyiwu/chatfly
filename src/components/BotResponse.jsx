@@ -7,7 +7,7 @@ const BotResponse = ({ response, chatLogRef }) => {
   const [isButtonVisible, setIsButtonVisible] = useState(false);
 
   useEffect(() => {
-    let index = 1;
+    let index = response.length;
     let msg = setInterval(() => {
       if (response !== " - The Ultimate AI Assistant") {
         setIsButtonVisible(true);

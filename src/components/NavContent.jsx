@@ -8,12 +8,12 @@ const NavContent = ({ chatLog, setChatLog, setShowMenu }) => {
     <>
       <NewChat setChatLog={setChatLog} setShowMenu={setShowMenu} />
       <div className="navPromptWrapper">
-        {chatLog.map(
+        {/* {chatLog.map(
           (chat, idx) =>
             chat.botMessage && (
               <NavPrompt chatPrompt={chat.chatPrompt} key={idx} />
             )
-        )}
+        )} */}
       </div>
       <NavLinksContainer chatLog={chatLog} setChatLog={setChatLog} />
     </>
