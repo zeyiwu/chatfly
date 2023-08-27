@@ -1,12 +1,17 @@
 import React from "react";
 
-const NavPrompt = ({ chatPrompt, setShowMenu }) => {
-  const chatPromptCharacters = chatPrompt.split("");
-  const navPromptHref = `navPrompt-${chatPrompt.replace(/[^a-zA-Z0-9]/g, "-")}`;
-
+const NavPrompt = ({chat, setChatLog, setChatId, setShowMenu}) => {
+  const name = (chat != null ? chat.name : "");
+  const chatPromptCharacters = name.split("");
+  const navPromptHref = `navPrompt-${name.replace(/[^a-zA-Z0-9]/g, "-")}`;
   return (
     <div className="navPrompt">
-      <a href={`#${navPromptHref}`} onClick={() => setShowMenu(false)}>
+      <a href={`#${navPromptHref}`} onClick={() => {
+        setShowMenu(false);
+        setChatLog(chat.chatLog);
+        console.log("chat.id "+chat.id);
+        setChatId(chat.id);
+        }}>
         <svg
           viewBox="0 0 16 16"
           xmlns="http://www.w3.org/2000/svg"

@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 
-const BotResponse = ({ response, chatLogRef }) => {
+const BotResponse = ({ response, chatLogRef, needPrint}) => {
   const [botResoponse, setBotResponse] = useState("");
   const [isPrinting, setIsPrinting] = useState(true);
   const [isButtonVisible, setIsButtonVisible] = useState(false);
 
   useEffect(() => {
-    let index = 1;
+    let index = needPrint ? 1 : response.length;
     let msg = setInterval(() => {
       if (response !== " - The Ultimate AI Assistant") {
         setIsButtonVisible(true);
@@ -31,7 +31,7 @@ const BotResponse = ({ response, chatLogRef }) => {
           block: "end",
         });
       }
-    }, 50);
+    }, 20);
     return () => clearInterval(msg); // clear interval on component unmount
   }, [chatLogRef, response, isPrinting]);
 

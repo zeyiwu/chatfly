@@ -14,29 +14,58 @@ const Home = () => {
   const [showMenu, setShowMenu] = useState(false);
   const [inputPrompt, setInputPrompt] = useState("");
   const [chatLog, setChatLog] = useState([]);
+  const [chats, setChats] = useState([]);
   const [chatId, setChatId] = useState("");
   const [questions, setQuestions] = useState([]);
   const [err, setErr] = useState(false);
   const [responseFromAPI, setResponseFromAPI] = useState(false);
 
   const chatLogRef = useRef(null);
-
-  const makeQuestionCall = async () => {
-    try {
-      await axios.post(BackendBaseURL+"debug/",{});
-      const response =await axios.post(BackendBaseURL+"getQuestion/",{});
-      const data = response.data;
-      data.questions === null ? setQuestions([]):setQuestions(data.questions);
-      console.log({ data })
-    }
-    catch (e) {
-      console.log(e)
-    }
-  }
-
-  useEffect(() => {
+  useEffect(()=>{
+    const makeQuestionCall = async () => {
+      try {
+        await axios.post(BackendBaseURL+"debug/",{});
+        const response =await axios.post(BackendBaseURL+"getChats/",{});
+        console.log(response.data);
+        const tChats = [];
+        response.data !== null && setChats(response.data.chats);
+        response.data !== null && response.data.chats.forEach(chat=>{
+          let tChat = {
+            'name':Base64.decode(chat.name),
+            'createTime':chat.create_time,
+            'updateTime':chat.update_time,
+            'questionCount':chat.question_count,
+            'id':chat.id,
+            'lastQuestionId':chat.last_question_id
+        }
+        let tempChatLog = []; 
+        if (chat.questions !==null){
+            chat.questions.forEach(
+              question=>{
+                tempChatLog.push({
+                    chatPrompt: Base64.decode(question.question),
+                    botMessage: Base64.decode(question.answer),  // base64 decode
+                    chatId:chat.id,
+                    questionId:question.id,
+                    createTime:question.create_time
+                  })}
+            );
+          }
+          tChat['chatLog'] =  tempChatLog
+          tChats.push(tChat);
+        })
+        console.log({chatLog});
+        console.log({tChats});
+        console.log({chats});
+        setChats([...tChats]);
+      }catch (e) {
+        console.log(e);
+      }
+    }  
     makeQuestionCall();
-  }, [])
+    console.log({chats});
+
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -92,9 +121,10 @@ const Home = () => {
         block: "end",
       });
     }
-
+ 
     return () => {};
   }, []);
+
 
   return (
     <>
@@ -121,8 +151,9 @@ const Home = () => {
         <nav>
           <div className="navItems">
             <NavContent
-              chatLog={chatLog}
+              chats={chats}
               setChatLog={setChatLog}
+              setChatId = {setChatId}
               setShowMenu={setShowMenu}
             />
           </div>
@@ -145,8 +176,9 @@ const Home = () => {
 
       <aside className="sideMenu">
         <NavContent
-          chatLog={chatLog}
-          setChatLog={setChatLog}
+          chats={chats}
+          setChatLog = {setChatLog}
+          setChatId = {setChatId}
           setShowMenu={setShowMenu}
         />
       </aside>
@@ -154,6 +186,7 @@ const Home = () => {
       <section className="chatBox">
         {chatLog.length > 0 ? (
           <div className="chatLogWrapper">
+            {console.log({chatLog})}
             {chatLog.length > 0 &&
               chatLog.map((chat, idx) => (
                 <div
@@ -198,6 +231,7 @@ const Home = () => {
                           <BotResponse
                             response={chat.botMessage}
                             chatLogRef={chatLogRef}
+                            needPrint={false}
                           />
                         </div>
                       ) : err ? (

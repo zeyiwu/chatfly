@@ -3,19 +3,19 @@ import NavLinksContainer from "./NavLinksContainer";
 import NavPrompt from "./NavPrompt";
 import NewChat from "./NewChat";
 
-const NavContent = ({ chatLog, setChatLog, setShowMenu }) => {
+const NavContent = ({ chats, setChats, setChatLog, setChatId, setShowMenu }) => {
   return (
     <>
       <NewChat setChatLog={setChatLog} setShowMenu={setShowMenu} />
       <div className="navPromptWrapper">
-        {chatLog.map(
+        {chats != null && chats.map(
           (chat, idx) =>
-            chat.botMessage && (
-              <NavPrompt chatPrompt={chat.chatPrompt} key={idx} />
+            chat.name && (
+              <NavPrompt chat={chat} setChatLog={setChatLog} setChatId={setChatId} setShowMenu={setShowMenu} key={idx} />
             )
         )}
       </div>
-      <NavLinksContainer chatLog={chatLog} setChatLog={setChatLog} />
+      <NavLinksContainer chatLog={[]} setChatLog={setChatLog} />
     </>
   );
 };
