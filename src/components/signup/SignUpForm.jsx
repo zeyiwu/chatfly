@@ -8,7 +8,7 @@ import SvgComponent from "../SvgComponent";
 import {SendVerifyCodeRemote, CreateUserWithMobileAndPassword} from "../remote/Api";
 // import { addDoc, collection } from "firebase/firestore";
 
-const DEFAULT_SECOND = 60;
+const DEFAULT_SECOND = 180;
 
 const SignupForm = () => {
   const [email, setEmail] = useState("");
