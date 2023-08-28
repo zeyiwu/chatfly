@@ -92,7 +92,7 @@ nav {
   text-indent: 0;
   white-space: pre-wrap;
   position: relative;
-  top: -45px;
+  /* top: -45px; */
 }
 pre {
   font-family: var(--text-font);
