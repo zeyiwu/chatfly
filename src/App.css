@@ -292,6 +292,12 @@ nav svg {
   align-items: flex-end;
   justify-content: center;
 }
+.inputPromptTextBox {
+  padding: 10px;
+  flex: 1;
+  resize: none;
+  margin: 0;
+}
 
 .inputPromptTextarea {
   padding: 10px;

@@ -220,7 +220,7 @@ const Home = () => {
 
         <form onSubmit={handleSubmit}>
           <div className="inputPromptWrapper">
-            <div className="inputPromptTextarea">
+            <div className="inputPromptTextBox">
             <input
               name="inputPrompt"
               id=""
