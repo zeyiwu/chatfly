@@ -293,24 +293,39 @@ nav svg {
   justify-content: center;
 }
 .inputPromptTextBox {
-  padding: 10px;
+  position: relative;
+  top: 0;
+  bottom: 0;
+  padding: 3px;
   flex: 1;
   resize: none;
-  margin: 0;
-}
-
-.inputPromptTextarea {
-  padding: 10px;
-  flex: 1;
-  resize: none;
-  background-color: #ffffff;
-  color: #0c0c0c;
+  background-color: #e0dede;
+  color: #fafafa;
   font-size: 16px;
   outline: none;
   border: none;
   overflow-y: hidden;
   border-radius: 6px;
   margin: 0;
+  height: inherit;
+}
+
+.inputPromptTextarea {
+  position:absolute;
+  /* width: 100%;
+  height: 100%; */
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  padding: 1px;
+  background: #e0dede;
+  display: flex; /* 使用弹性布局，使子元素较为灵活地填充 */
+  flex-direction: column;
+  border-radius: 6px;
+  font-size: 16px;
+  flex: 1;
+
 }
 form button {
   background: rgb(158, 158, 241);
