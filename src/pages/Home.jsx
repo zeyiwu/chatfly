@@ -220,6 +220,7 @@ const Home = () => {
 
         <form onSubmit={handleSubmit}>
           <div className="inputPromptWrapper">
+            <div className="inputPromptTextarea">
             <input
               name="inputPrompt"
               id=""
@@ -230,6 +231,8 @@ const Home = () => {
               onChange={(e) => setInputPrompt(e.target.value)}
               autoFocus
             ></input>
+            </div>
+
             <button aria-label="form submit" type="submit">
               <svg
                 fill="#ADACBF"
