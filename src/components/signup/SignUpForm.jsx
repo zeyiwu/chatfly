@@ -8,7 +8,7 @@ import SvgComponent from "../SvgComponent";
 import {SendVerifyCodeRemote, CreateUserWithMobileAndPassword} from "../remote/Api";
 // import { addDoc, collection } from "firebase/firestore";
 
-const DEFAULT_SECOND = 180;
+const DEFAULT_SECOND = 120;
 
 const SignupForm = () => {
   const [email, setEmail] = useState("");
@@ -30,7 +30,7 @@ const SignupForm = () => {
     try {
       let userCredential = await CreateUserWithMobileAndPassword({mobile, code, password});
       console.log("register:"+JSON.stringify(userCredential));
-      navigate("/register/");
+      // navigate("/register/");
 
       dispatch({ type: "SIGNUP", payload: userCredential});
 
