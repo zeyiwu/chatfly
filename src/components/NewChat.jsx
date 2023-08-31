@@ -10,7 +10,7 @@ const NewChat = ({ setChatLog, setShowMenu }) => {
       }}
     >
       <span>+</span>
-      New chat
+      新建会话 
     </div>
   );
 };

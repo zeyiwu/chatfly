@@ -52,7 +52,7 @@ const NavLinksContainer = ({ chatLog, setChatLog }) => {
               />
             </svg>
           }
-          text="Clear Conversations"
+          text="清空会话"
           setChatLog={setChatLog}
         />
       )}
@@ -119,7 +119,7 @@ const NavLinksContainer = ({ chatLog, setChatLog }) => {
             />
           </svg>
         }
-        text="Log out"
+        text="退出登录"
         link=""
       />
       {/* <BuyMeACoffeeButton /> */}
