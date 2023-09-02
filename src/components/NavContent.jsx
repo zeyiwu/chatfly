@@ -3,7 +3,7 @@ import NavLinksContainer from "./NavLinksContainer";
 import NavPrompt from "./NavPrompt";
 import NewChat from "./NewChat";
 
-const NavContent = ({ chatLog, setChatLog, setShowMenu }) => {
+const NavContent = ({ chatLog, setChatLog, setShowMenu, chatModel, setChatModel }) => {
   return (
     <>
       <NewChat setChatLog={setChatLog} setShowMenu={setShowMenu} />
@@ -15,7 +15,7 @@ const NavContent = ({ chatLog, setChatLog, setShowMenu }) => {
             )
         )} */}
       </div>
-      <NavLinksContainer chatLog={chatLog} setChatLog={setChatLog} />
+      <NavLinksContainer chatLog={chatLog} setChatLog={setChatLog} chatModel={chatModel} setChatModel={setChatModel} />
     </>
   );
 };

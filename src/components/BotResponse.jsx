@@ -7,9 +7,9 @@ const BotResponse = ({ response, chatLogRef }) => {
   const [isButtonVisible, setIsButtonVisible] = useState(false);
 
   useEffect(() => {
-    let index = response.length;
+    let index = response.length;  // todo: 流式展示设置为0
     let msg = setInterval(() => {
-      if (response !== " - The Ultimate AI Assistant") {
+      if (response !== " - AI 机器人") {
         setIsButtonVisible(true);
       }
       if (!isPrinting) {

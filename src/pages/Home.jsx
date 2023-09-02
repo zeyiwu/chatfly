@@ -9,6 +9,7 @@ import SvgComponent from "../components/SvgComponent";
 import axios from "axios";
 import {Base64} from "js-base64";
 import {BackendBaseURL} from "../components/remote/Api"
+import {ChatModels} from "../data/GlobalData"
 
 const Home = () => {
   const [showMenu, setShowMenu] = useState(false);
@@ -16,6 +17,8 @@ const Home = () => {
   const [chatLog, setChatLog] = useState([]);
   const [err, setErr] = useState(false);
   const [responseFromAPI, setResponseFromAPI] = useState(false);
+  console.log("chatModels " + ChatModels);
+  const [chatModel, setChatModel] = useState(ChatModels[0]);
 
   const chatLogRef = useRef(null);
 
@@ -28,8 +31,8 @@ const Home = () => {
         let tempChatLog = []; 
         response.data !== null && response.data.chatLogs.forEach(chatLog=>{
         tempChatLog.push({
-                    chatPrompt: Base64.decode(chatLog.question),
-                    botMessage: Base64.decode(chatLog.answer),  // base64 decode
+                    chatPrompt:chatLog.question,
+                    botMessage:chatLog.answer,  // base64 decode
                     questionId:chatLog.id,
                     createTime:chatLog.create_time
                   });
@@ -51,7 +54,7 @@ const Home = () => {
       if (inputPrompt.trim() !== "") {
         // Set responseFromAPI to true before making the fetch request
         setResponseFromAPI(true);
-        setChatLog([...chatLog, { chatPrompt: inputPrompt }]);
+        setChatLog([...chatLog, { chatPrompt: Base64.encode(inputPrompt) }]);
         callAPI();
 
         // hide the keyboard in mobile devices
@@ -61,7 +64,7 @@ const Home = () => {
       async function callAPI() {
         try {
           const prompt = inputPrompt;
-          const data = await axios.post(BackendBaseURL+"chat/",{message: Base64.encode(inputPrompt)}) // base64 encode
+          const data = await axios.post(BackendBaseURL+"chat/", {message: Base64.encode(inputPrompt), chatModel:chatModel, chatLog:chatLog.slice(-10,0)}) // base64 encode
           .then((response) => {
             return response.data;
           }).catch((err)=>{
@@ -72,8 +75,8 @@ const Home = () => {
           setChatLog([
             ...chatLog,
             {
-              chatPrompt: inputPrompt,
-              botMessage: Base64.decode(data.botResponse),  // base64 decode
+              chatPrompt: Base64.encode(inputPrompt),
+              botMessage: data.botResponse,  // base64 encoded
             },
           ]);
           setErr(false);
@@ -128,6 +131,8 @@ const Home = () => {
               chatLog={chatLog}
               setChatLog={setChatLog}
               setShowMenu={setShowMenu}
+              chatModel={chatModel}
+              setChatModel={setChatModel}
             />
           </div>
           <div className="navCloseIcon">
@@ -152,6 +157,8 @@ const Home = () => {
           chatLog={chatLog}
           setChatLog={setChatLog}
           setShowMenu={setShowMenu}
+          chatModel={chatModel}
+          setChatModel={setChatModel}
         />
       </aside>
 
@@ -164,7 +171,7 @@ const Home = () => {
                   className="chatLog"
                   key={idx}
                   ref={chatLogRef}
-                  id={`navPrompt-${chat.chatPrompt.replace(
+                  id={`navPrompt-${Base64.decode(chat.chatPrompt).replace(
                     /[^a-zA-Z0-9]/g,
                     "-"
                   )}`}
@@ -188,7 +195,7 @@ const Home = () => {
                           <circle cx={12} cy={7} r={4} />
                         </svg>
                       </Avatar>
-                      <div id="chatPrompt">{chat.chatPrompt}</div>
+                      <div id="chatPrompt">{Base64.decode(chat.chatPrompt)}</div>
                     </div>
                   </div>
 
@@ -200,7 +207,7 @@ const Home = () => {
                       {chat.botMessage ? (
                         <div id="botMessage">
                           <BotResponse
-                            response={chat.botMessage}
+                            response={Base64.decode(chat.botMessage)}
                             chatLogRef={chatLogRef}
                           />
                         </div>

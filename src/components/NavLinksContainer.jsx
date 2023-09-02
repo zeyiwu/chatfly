@@ -1,15 +1,26 @@
 import React, {useContext} from "react";
 import NavLinks from "./NavLink";
-import BuyMeACoffeeButton from "./BuyMeACoffeeButton";
 import { AuthContext } from "../context/AuthContext";
+import {ChatModels} from "../data/GlobalData"
+import PayVIPButton from "./PayVIPButton"
 
-const NavLinksContainer = ({ chatLog, setChatLog }) => {
+
+const NavLinksContainer = ({ chatLog, setChatLog, chatModel, setChatModel }) => {
   const { currentUser } = useContext(AuthContext);
   return (
     <div className="navLinks">
-      <h5>{currentUser.name}</h5>
-      {chatLog.length > 0 && (
-        <NavLinks
+      <br></br>
+      <div><h5>{currentUser.name}</h5></div> 
+      <PayVIPButton />
+      <select onChange={(e)=>{setChatModel(e.target.value)}}>
+        {ChatModels.map((model) => (
+          <option key={model.value} value={model.value}>
+            {model.name}
+          </option>
+        ))}
+      </select>
+    
+      <NavLinks
           svg={
             <svg
               fill="#fff"
@@ -55,7 +66,7 @@ const NavLinksContainer = ({ chatLog, setChatLog }) => {
           text="清空会话"
           setChatLog={setChatLog}
         />
-      )}
+      
       {/* <NavLinks
         svg={
           <svg
@@ -122,7 +133,6 @@ const NavLinksContainer = ({ chatLog, setChatLog }) => {
         text="退出登录"
         link=""
       />
-      {/* <BuyMeACoffeeButton /> */}
     </div>
   );
 };
