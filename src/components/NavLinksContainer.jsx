@@ -2,7 +2,7 @@ import React, {useContext} from "react";
 import NavLinks from "./NavLink";
 import { AuthContext } from "../context/AuthContext";
 import {ChatModels} from "../data/GlobalData"
-import PayVIPButton from "./PayVIPButton"
+import { Link } from "react-router-dom";
 
 
 const NavLinksContainer = ({ chatLog, setChatLog, chatModel, setChatModel }) => {
@@ -11,7 +11,7 @@ const NavLinksContainer = ({ chatLog, setChatLog, chatModel, setChatModel }) => 
     <div className="navLinks">
       <br></br>
       <div><h5>{currentUser.name}</h5></div> 
-      <PayVIPButton />
+      <Link to="/pay">升级VIP</Link>
       <select onChange={(e)=>{setChatModel(e.target.value)}}>
         {ChatModels.map((model) => (
           <option key={model.value} value={model.value}>
