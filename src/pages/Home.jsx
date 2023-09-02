@@ -18,7 +18,7 @@ const Home = () => {
   const [err, setErr] = useState(false);
   const [responseFromAPI, setResponseFromAPI] = useState(false);
   console.log("chatModels " + ChatModels);
-  const [chatModel, setChatModel] = useState(ChatModels[0]);
+  const [chatModel, setChatModel] = useState(ChatModels[0].value);
 
   const chatLogRef = useRef(null);
 
