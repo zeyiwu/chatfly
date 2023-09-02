@@ -64,7 +64,7 @@ const Home = () => {
       async function callAPI() {
         try {
           const prompt = inputPrompt;
-          const data = await axios.post(BackendBaseURL+"chat/", {message: Base64.encode(inputPrompt), chatModel:chatModel, chatLog:chatLog.slice(-10,0)}) // base64 encode
+          const data = await axios.post(BackendBaseURL+"chat/", {message: Base64.encode(inputPrompt), chatModel:chatModel, chatLog:chatLog.slice(-3)}) // base64 encode
           .then((response) => {
             return response.data;
           }).catch((err)=>{
