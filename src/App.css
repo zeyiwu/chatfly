@@ -395,47 +395,6 @@ form button {
 #loginButton:hover {
   background-color: rgb(26, 127, 100);
 }
-.payDonate{
-  background-color: #f8f9fa;
-  padding: 12px 20px;
-  border-radius: 12px;
-}
-.payGoodList{
-  flex: 1;
-  min-width: 150px;
-  min-height: 11px;
-  box-sizing: content-box;
-  background-color: #fff;
-  border-radius: 8px;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  border: 2px solid transparent;
-  transition: border-color .4s ease-in-out;
-  cursor: pointer;
-  position: relative;
-}
-.payChannel{
-  display: flex;
-  align-items: center;
-  margin-top: 20px;
-}
-.paySub{
-  font-size: 16px;
-  height: 40px;
-  padding: 6.428571428571429px 15px;
-  border-radius: 8px;
-}
-.good{
-  border-color: #1877ff;
-}
-.goodField{
-  font-size: 16px;
-  margin-top: 3px;
-  margin-bottom: 3px;
-  color: #444;
-  cursor: pointer;
-}
 
 @media screen and (min-width: 768px) {
   .inputPromptWrapper {
@@ -507,5 +466,65 @@ form button {
   }
   #loginButton {
     font-size: 22px;
+  }
+}
+
+@media screen and (min-width: 1536px) {
+  .payDonate{
+    background-color: #f8f9fa;
+    padding: 12px 20px;
+    border-radius: 12px;
+    font-family: var(--text-font);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+  .payGoodList{
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+
+  }
+  .payChannel{
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+  }
+  .paySub{
+    font-size: 16px;
+    height: 40px;
+    padding: 6.428571428571429px 15px;
+    border-radius: 8px;
+  }
+  .good{
+    flex: 1;
+    width: 150px;
+    min-width: 150px;
+    min-height: 110px;
+    box-sizing: content-box;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid transparent;
+    transition: border-color .4s ease-in-out;
+    cursor: pointer;
+    position: relative;
+    
+  }
+  .goodField{
+    font-size: 16px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    color: #444;
+    cursor: pointer;
   }
 }

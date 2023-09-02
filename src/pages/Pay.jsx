@@ -20,7 +20,18 @@ export const PayView=()=> {
         }
       </div>
       <div className='payChannel'>
-        <div><img src='...'></img></div>
+        <div>
+        <img
+          src="/wechatPay.png"
+          alt="wechat pay"
+          style={{
+            height: "40px",
+            position: "relative",
+            left: "4px",
+            display: "block",
+          }}
+        />
+        </div>
         <button type="button" className='paySub'>
             <span>立即充值</span>
         </button>
