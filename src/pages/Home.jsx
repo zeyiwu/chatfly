@@ -22,30 +22,30 @@ const Home = () => {
 
   const chatLogRef = useRef(null);
 
-  useEffect(()=>{
-    const makeChatLogCall = async () => {
-      try {
-        await axios.post(BackendBaseURL+"debug/",{});
-        const response =await axios.post(BackendBaseURL+"getChatLogs/",{});
-        console.log(response.data);
-        let tempChatLog = []; 
-        response.data !== null && response.data.chatLogs.forEach(chatLog=>{
-        tempChatLog.push({
-                    chatPrompt:chatLog.question,
-                    botMessage:chatLog.answer,  // base64 decode
-                    questionId:chatLog.id,
-                    createTime:chatLog.create_time
-                  });
-         });
-        console.log({tempChatLog});
-        setChatLog(tempChatLog);
-      }catch (e) {
-        console.log(e);
-      }
-    }  
-    makeChatLogCall();
-    console.log({chatLog});
-  }, []);
+  // useEffect(()=>{
+  //   const makeChatLogCall = async () => {
+  //     try {
+  //       await axios.post(BackendBaseURL+"debug/",{});
+  //       const response =await axios.post(BackendBaseURL+"getChatLogs/",{});
+  //       console.log(response.data);
+  //       let tempChatLog = []; 
+  //       response.data !== null && response.data.chatLogs.forEach(chatLog=>{
+  //       tempChatLog.push({
+  //                   chatPrompt:chatLog.question,
+  //                   botMessage:chatLog.answer,  // base64 decode
+  //                   questionId:chatLog.id,
+  //                   createTime:chatLog.create_time
+  //                 });
+  //        });
+  //       console.log({tempChatLog});
+  //       setChatLog(tempChatLog);
+  //     }catch (e) {
+  //       console.log(e);
+  //     }
+  //   }  
+  //   makeChatLogCall();
+  //   console.log({chatLog});
+  // }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
