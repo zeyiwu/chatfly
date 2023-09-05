@@ -12,7 +12,8 @@ function App() {
   const { currentUser } = useContext(AuthContext);
 
   const RequireAuth = ({ children }) => {
-    return currentUser ? children : <Navigate to="login" />;
+      return children;
+    // return currentUser ? children : <Navigate to="login" />;
   };
 
   return (
@@ -31,7 +32,7 @@ function App() {
         <Route exact path="register" element={<SignupForm />} />
         <Route exact path="login" element={<LoginForm />} />
         <Route exact path="pay" element={<PayView />}/>
-        
+
       </Routes>
     </div>
   );
