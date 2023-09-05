@@ -1,16 +1,24 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const NewChat = ({ setChatLog, setShowMenu }) => {
+  const { currentUser } = useContext(AuthContext);
+  const navigate = useNavigate();
   return (
     <div
       className="sideMenuButton"
       onClick={() => {
-        setChatLog([]);
-        setShowMenu(false);
+        if (!currentUser) {
+          navigate("/login");
+        } else {
+          setChatLog([]);
+          setShowMenu(false);
+        }
       }}
     >
       <span>+</span>
-      新建会话 
+      新建会话
     </div>
   );
 };

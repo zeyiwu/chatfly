@@ -1,0 +1,136 @@
+.header {
+    background: linear-gradient(100deg,#8359E3,#8359E3,#FF72B6);
+    height: 56px;
+    line-height: 56px;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+button {
+    background:transparent;
+    outline:none;
+    border:none;
+}
+
+.login-button {
+    background: linear-gradient(to right,#ff9a9e,#fad0c4,#a1c4fd,#c2e9fb);
+    background-size: 300% auto;
+    transition: background-position .5s;
+    animation: bganimation 5s ease infinite;
+    color: white;
+    box-shadow: 0 2px 0 rgba(122, 5, 255, 0.06);
+    font-size: 14px;
+    height: 32px;
+    padding: 4px 15px;
+    border-radius: 6px;
+    margin-right: 16px;
+}
+
+.login-button:hover{
+    background: linear-gradient(to right,#ff9a9e,#fad0c4,#a1c4fd,#c2e9fb);
+}
+
+@keyframes bganimation{
+    0% {
+        background-position:0% 0% ;
+    }
+    50% {
+        background-position:100% ;
+    }
+}
+
+
+.nav{
+    background:transparent;
+}
+
+.navItems {
+    padding: 12px;
+    background-color: white;
+    flex:3;
+}
+
+.navRight {
+    flex:1
+}
+
+.navCloseIcon {
+    position:absolute;
+    top:40%;
+    right:65px;
+    border-radius: 50%;
+    height: 28px;
+    width: 28px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 8px -2px rgba(0,0,0,0.05), 0 1px 4px -1px rgba(25,15,15,0.07), 0 0 1px 0 rgba(0,0,0,0.08);
+}
+
+.inputContainer{
+    box-sizing: border-box;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 11px 11px 20px;
+}
+
+.inputQuestion{
+    flex:4;
+    padding: 1px 11px;
+    background: #ffffff;
+    border-radius: 6px;
+    border:1px solid rgb(217, 217, 217);
+    height: 38px;
+    max-height: 104px;
+    color: rgba(0, 0, 0, 0.88);
+    font-size: 14px;
+    margin-right: 16px;
+    outline: none;
+}
+
+.inputQuestion:focus-visible{
+    border:1px solid rgb(217, 217, 217);
+    padding: 1px 11px;
+    outline: none;
+}
+
+.submitButton {
+    flex:1;
+    border: none;
+    border-radius: 5px;
+    opacity: 0.8;
+    height: 38px;
+    max-height: 104px;
+    font-size: 14px;
+    background: linear-gradient(to bottom,#4dc7d9 0%,#66a6ff 100%);
+    color: #fff;
+    padding: 0.6em 1.2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 5px 10px #0003;
+}
+
+.submitButton:hover{
+    background: linear-gradient(to bottom,#4dc7d9 0%,#66a6ff 100%);
+}
+
+@media screen and (min-width: 768px) {
+
+}
+
+
+@media screen and (max-width: 1024px) {
+
+}
+
+@media screen and (min-width: 1536px) {
+    .navButton {
+        display:none;
+    }
+    .navImg{
+        margin-left: 12px;
+    }
+}
+
