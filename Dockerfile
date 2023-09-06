@@ -1,8 +1,6 @@
-FROM node:latest
+FROM node:alpine
 WORKDIR /app
-COPY package*.json ./
-RUN npm install
-RUN yarn install
-COPY . .
+COPY . ./
+RUN yarn
 EXPOSE 7079
-CMD ["npm", "start"]
+# CMD ["yarn", "start"]
