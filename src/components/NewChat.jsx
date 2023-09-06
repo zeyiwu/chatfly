@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
-const NewChat = ({ setChatLog, setShowMenu }) => {
+const NewChat = ({setOpen, setChatLog, setShowMenu }) => {
   const { currentUser } = useContext(AuthContext);
   const navigate = useNavigate();
   return (
@@ -10,7 +10,8 @@ const NewChat = ({ setChatLog, setShowMenu }) => {
       className="sideMenuButton"
       onClick={() => {
         if (!currentUser) {
-          navigate("/login");
+          // navigate("/login");
+            setOpen(true);
         } else {
           setChatLog([]);
           setShowMenu(false);

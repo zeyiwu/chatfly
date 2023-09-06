@@ -14,12 +14,8 @@ import "./home.css";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { Modal,Tabs } from 'antd';
-import LoginForm from "../components/login/LoginForm";
-import SignupForm from "../components/signup/SignUpForm";
-import login from "../components/login/Login";
 import Login from "../components/login/Login";
 import SignUp from "../components/signup/SignUp";
-
 
 const Home = () => {
 
@@ -85,14 +81,13 @@ const Home = () => {
       async function callAPI() {
         try {
           const prompt = inputPrompt;
-          const body ={
-            message:Base64.encode(prompt),
-            chatModel: chatModel,
-            chatLog: chatLog.slice(-3),
-          }
 
           const data = await axios
-            .post(BackendBaseURL+"chat/", body) // base64 encode
+            .post(BackendBaseURL + "chat/", {
+              message: Base64.encode(prompt),
+              chatModel: chatModel,
+              chatLog: chatLog.slice(-3),
+            }) // base64 encode
             .then((response) => {
               return response.data;
             })
@@ -172,6 +167,7 @@ const Home = () => {
               setShowMenu={setShowMenu}
               chatModel={chatModel}
               setChatModel={setChatModel}
+              setOpen={setOpen}
             />
           </div>
           <div className="navCloseIcon">
@@ -200,6 +196,8 @@ const Home = () => {
               setShowMenu={setShowMenu}
               chatModel={chatModel}
               setChatModel={setChatModel}
+              setOpen={setOpen}
+
           />
         </aside>
 

@@ -3,10 +3,10 @@ import NavLinksContainer from "./NavLinksContainer";
 import NavPrompt from "./NavPrompt";
 import NewChat from "./NewChat";
 
-const NavContent = ({ chatLog, setChatLog, setShowMenu, chatModel, setChatModel }) => {
+const NavContent = ({setOpen, chatLog, setChatLog, setShowMenu, chatModel, setChatModel }) => {
   return (
     <>
-      <NewChat chatLog={chatLog} setChatLog={setChatLog} setShowMenu={setShowMenu} />
+      <NewChat setOpen={setOpen} chatLog={chatLog} setChatLog={setChatLog} setShowMenu={setShowMenu} />
       <div className="navPromptWrapper">
         {chatLog.map(
           (chat, idx) =>
