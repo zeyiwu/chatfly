@@ -31,33 +31,6 @@ const Home = () => {
 
   const chatLogRef = useRef(null);
 
-  useEffect(()=>{
-    const makeChatLogCall = async () => {
-      if(currentUser){
-        try {
-          await axios.post(BackendBaseURL+"debug/",{});
-          const response =await axios.post(BackendBaseURL+"getChatLogs/",{});
-          console.log(response.data);
-          let tempChatLog = [];
-          response.data !== null && response.data.chatLogs.forEach(chatLog=>{
-            tempChatLog.push({
-              chatPrompt: Base64.decode(chatLog.question),
-              botMessage: Base64.decode(chatLog.answer),  // base64 decode
-              questionId:chatLog.id,
-              createTime:chatLog.create_time
-            });
-          });
-          console.log({tempChatLog});
-          setChatLog(tempChatLog);
-        } catch (e) {
-          console.log(e);
-        }
-      }
-    }
-    makeChatLogCall();
-    console.log({chatLog});
-  }, []);
-
   const handleSubmit = (e) => {
     if(!currentUser){
       // navigate("/login");
@@ -71,7 +44,7 @@ const Home = () => {
       if (inputPrompt.trim() !== "") {
         // Set responseFromAPI to true before making the fetch request
         setResponseFromAPI(true);
-        setChatLog([...chatLog, { chatPrompt: inputPrompt }]);
+        setChatLog([...chatLog, { chatPrompt: Base64.encode(inputPrompt) }]);
         callAPI();
 
         // hide the keyboard in mobile devices
@@ -235,7 +208,7 @@ const Home = () => {
                                 </svg>
                               </Avatar>
                               <div id="chatPrompt">
-                                {chat.chatPrompt}
+                                {Base64.decode(chat.chatPrompt)}
                               </div>
                             </div>
                           </div>
@@ -248,7 +221,7 @@ const Home = () => {
                               {chat.botMessage ? (
                                   <div id="botMessage">
                                     <BotResponse
-                                        response={chat.botMessage}
+                                        response={Base64.decode(chat.botMessage)}
                                         chatLogRef={chatLogRef}
                                     />
                                   </div>
