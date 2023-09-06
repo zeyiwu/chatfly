@@ -17,7 +17,7 @@ const NavLinksContainer = ({
 
   return (
     <div className="navLinks">
-      {currentUser ? <h5>{currentUser.name}</h5> : null}
+      {currentUser ? <p>{currentUser.name}</p> : null}
 
         <button className="navLink" onClick={()=>{
             navigate("/pay");

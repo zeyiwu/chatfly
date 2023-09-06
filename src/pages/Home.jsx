@@ -13,14 +13,22 @@ import { ChatModels } from "../data/GlobalData";
 import "./home.css";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { Modal,Tabs } from 'antd';
+import LoginForm from "../components/login/LoginForm";
+import SignupForm from "../components/signup/SignUpForm";
+import login from "../components/login/Login";
+import Login from "../components/login/Login";
+import SignUp from "../components/signup/SignUp";
+
 
 const Home = () => {
+
+  const [open, setOpen] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const [inputPrompt, setInputPrompt] = useState("");
   const [chatLog, setChatLog] = useState([]);
   const [err, setErr] = useState(false);
   const [responseFromAPI, setResponseFromAPI] = useState(false);
-  console.log("chatModels " + ChatModels);
   const [chatModel, setChatModel] = useState(ChatModels[0].value);
   const { currentUser } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -56,7 +64,8 @@ const Home = () => {
 
   const handleSubmit = (e) => {
     if(!currentUser){
-      navigate("/login");
+      // navigate("/login");
+      setOpen(true);
       return;
     }
 
@@ -76,12 +85,14 @@ const Home = () => {
       async function callAPI() {
         try {
           const prompt = inputPrompt;
+          const body ={
+            message:Base64.encode(prompt),
+            chatModel: chatModel,
+            chatLog: chatLog.slice(-3),
+          }
+
           const data = await axios
-            .post(BackendBaseURL + "chat/", {
-              message: inputPrompt,
-              chatModel: chatModel,
-              chatLog: chatLog.slice(-3),
-            }) // base64 encode
+            .post(BackendBaseURL+"chat/", body) // base64 encode
             .then((response) => {
               return response.data;
             })
@@ -144,7 +155,8 @@ const Home = () => {
           currentUser ? null : <button
               className="login-button"
               onClick={()=>{
-                navigate("/login");
+                // navigate("/login");
+                setOpen(true);
               }}>
             登录/注册
           </button>
@@ -275,9 +287,36 @@ const Home = () => {
             </div>
           </form>
         </section>
+
+        <Modal
+            open={open}
+            title={null}
+            onCancel={()=>setOpen(false)}
+            footer={null}
+        >
+          <div className={"login-header"}>
+            <img src="https://abibb.com/logo.svg" width={'44px'} height={'44px'}></img>
+            <p>与智能AI进行对话交流</p>
+          </div>
+          <Tabs
+              defaultActiveKey="login"
+              items={[
+                {
+                  key: 'login',
+                  label: '登录',
+                  children: <Login/>,
+                },
+                {
+                  key: 'register',
+                  label: '注册',
+                  children: <SignUp/>,
+                },
+              ]}
+              onChange={(key)=>{
+                  console.log(key);
+              }} />
+        </Modal>
       </div>
-
-
     </>
   );
 };

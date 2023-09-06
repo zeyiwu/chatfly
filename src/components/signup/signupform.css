@@ -91,3 +91,14 @@
 #signupWithEmail:hover {
   background-color: rgb(236, 236, 236) !important;
 }
+
+
+.codeInput {
+  width: 80%;
+}
+
+@media screen and (max-width: 768px) {
+  .codeInput{
+    width: 60%;
+  }
+}

@@ -6,14 +6,14 @@ import NewChat from "./NewChat";
 const NavContent = ({ chatLog, setChatLog, setShowMenu, chatModel, setChatModel }) => {
   return (
     <>
-      <NewChat setChatLog={setChatLog} setShowMenu={setShowMenu} />
+      <NewChat chatLog={chatLog} setChatLog={setChatLog} setShowMenu={setShowMenu} />
       <div className="navPromptWrapper">
-        {/* {chatLog.map(
+        {chatLog.map(
           (chat, idx) =>
             chat.botMessage && (
               <NavPrompt chatPrompt={chat.chatPrompt} key={idx} />
             )
-        )} */}
+        )}
       </div>
       <NavLinksContainer chatLog={chatLog} setChatLog={setChatLog} chatModel={chatModel} setChatModel={setChatModel} />
     </>
